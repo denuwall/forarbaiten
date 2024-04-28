@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image, ImageOps
+from PIL import ImageOps, Image
 from docx import Document
 import os
 import base64
@@ -29,6 +29,7 @@ class Text2ImageAPI:
             "type": "GENERATE",
             "numImages": images,
             "width": width,
+            "censored": False,
             "height": height,
             "generateParams": {
                 "query": f"{prompt}"
@@ -54,9 +55,12 @@ class Text2ImageAPI:
             time.sleep(delay)
 
 # Функция для изменения размера изображения
+
+# Функция для изменения размера изображения
 def resize_image(image, width, height):
-    resized_image = ImageOps.fit(image, (width, height), Image.ANTIALIAS)
+    resized_image = image.resize((width, height))
     return resized_image
+
 
 # Функция для очистки метаданных с фотографии
 def clear_metadata(image):
