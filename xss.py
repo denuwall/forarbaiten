@@ -29,7 +29,6 @@ class Text2ImageAPI:
             "type": "GENERATE",
             "numImages": images,
             "width": width,
-            "censored": false,
             "height": height,
             "generateParams": {
                 "query": f"{prompt}"
