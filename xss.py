@@ -90,7 +90,7 @@ def get_binary_file_downloader_html(bin_file, file_label='File', file_name='file
 def main():
     st.title("Меню")
 
-    menu = ["Изменение размера фото", "Замена слова в документе Word", "Очистка метаданных с фото", "Текст в изображение"]
+    menu = ["Изменение размера фото", "Создание EULA", "Очистка метаданных с фото", "Текст в изображение"]
     choice = st.sidebar.selectbox("Выберите функцию", menu)
 
     if choice == "Изменение размера фото":
@@ -114,13 +114,13 @@ def main():
                 zipped_images.seek(0)
                 st.markdown(f"### [Скачать все изображения архивом](data:application/zip;base64,{base64.b64encode(zipped_images.read()).decode()})", unsafe_allow_html=True)
 
-    elif choice == "Замена слова в документе Word":
-        st.header("Замена слова в документе Word")
-        replacement = st.text_input("Введите новое слово для замены", "aboba")
-        if st.button("Заменить слово"):
+    elif choice == "Создание EULA":
+        st.header("Создание EULA")
+        replacement = st.text_input("Введите название приложения", "aboba")
+        if st.button("Создать"):
             temp_file_path = replace_word_in_docx(replacement)
-            st.success("Слово успешно заменено в документе")
-            st.markdown(get_binary_file_downloader_html(temp_file_path, file_label="Скачать измененный документ", file_name="ready.docx"), unsafe_allow_html=True)
+            st.success("EULA успешно создан")
+            st.markdown(get_binary_file_downloader_html(temp_file_path, file_label="Скачать EULA", file_name="ready.docx"), unsafe_allow_html=True)
             os.remove(temp_file_path)
 
     elif choice == "Очистка метаданных с фото":
